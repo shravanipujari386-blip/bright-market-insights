@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/AppHeader";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (s: Record<string, unknown>) => ({ redirect: typeof s.redirect === "string" ? s.redirect : undefined }),
+  validateSearch: (s: Record<string, unknown>): { redirect?: string } => ({ redirect: typeof s["redirect"] === "string" ? s["redirect"] : undefined }),
   head: () => ({
     meta: [
       { title: "Sign in — Meridian Market Research" },
@@ -70,7 +70,7 @@ function AuthPage() {
     try {
       if (mode === "signup") {
         const p = signupSchema.safeParse(f);
-        if (!p.success) return setErr(p.error.issues[0].message);
+        if (!p.success) return setErr(p.error.issues[0]?.message ?? "Invalid input");
         const { error } = await supabase.auth.signUp({
           email: p.data.email,
           password: p.data.password,

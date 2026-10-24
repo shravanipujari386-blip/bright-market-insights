@@ -57,7 +57,8 @@ export async function runStructured<T>(opts: {
 
   let streamError: unknown;
   const result = streamText({
-    model: provider.responses(MODEL),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    model: provider.responses(MODEL) as any,
     instructions: opts.instructions,
     prompt: opts.prompt,
     output: Output.object({ schema: opts.schema, name: opts.name }),

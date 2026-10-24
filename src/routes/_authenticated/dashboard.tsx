@@ -48,7 +48,10 @@ function Dashboard() {
   });
 
   async function submit() {
-    if (q.trim().length < 10) return toast.error("Please describe your research question in a bit more detail.");
+    if (q.trim().length < 10) {
+      toast.error("Please describe your research question in a bit more detail.");
+      return;
+    }
     setBusy(true);
     try {
       const r = await start({ data: { query: q.trim() } });
