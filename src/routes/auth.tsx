@@ -33,6 +33,7 @@ const signupSchema = z
   .refine((v) => v.password === v.confirm, { message: "Passwords do not match", path: ["confirm"] });
 
 function safePath(p?: string) {
+  p = p ?? sessionStorage.getItem("post_auth") ?? undefined;
   if (!p) return "/dashboard";
   try {
     const u = new URL(p, window.location.origin);
