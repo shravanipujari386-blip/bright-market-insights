@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
+import { Eye, EyeOff, FileSearch, ShieldCheck, TrendingUp, Download } from "lucide-react";
 import "@lovable.dev/cloud-auth-js/styles.css";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
@@ -32,6 +33,13 @@ const signupSchema = z
   })
   .refine((v) => v.password === v.confirm, { message: "Passwords do not match", path: ["confirm"] });
 
+const highlights = [
+  { icon: FileSearch, t: "Live web sources", d: "Every report is built from real, current pages — nothing invented." },
+  { icon: ShieldCheck, t: "Fact-checked claims", d: "A reviewer agent traces each key claim back to its source." },
+  { icon: TrendingUp, t: "Trends & competitors", d: "Structured analysis across trends, competitors, customers and market size." },
+  { icon: Download, t: "Shareable reports", d: "Download your findings as PDF or CSV with citations included." },
+];
+
 function safePath(p?: string) {
   p = p ?? sessionStorage.getItem("post_auth") ?? undefined;
   if (!p) return "/dashboard";
@@ -50,6 +58,8 @@ function AuthPage() {
   const [f, setF] = useState({ name: "", email: "", password: "", confirm: "" });
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [showPw, setShowPw] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -101,31 +111,104 @@ function AuthPage() {
     if (r.error) setErr(r.error.message ?? "Sign-in failed");
   }
 
+  const heading = mode === "signup" ? "Create your account" : mode === "forgot" ? "Reset your password" : "Welcome back";
+  const subcopy =
+    mode === "signup"
+      ? "Start researching in minutes — free to try."
+      : mode === "forgot"
+        ? "We'll email you a link to set a new password."
+        : "Sign in to run research and see your reports.";
+
   return (
-    <div className="grid min-h-screen md:grid-cols-2">
-      <div className="hidden flex-col justify-between bg-primary p-10 text-primary-foreground md:flex">
-        <span className="font-display text-2xl">Meridian</span>
-        <div>
+    <div className="grid min-h-screen md:grid-cols-[1fr_1.1fr]">
+      <div className="relative hidden flex-col justify-between bg-primary p-10 text-primary-foreground lg:flex">
+        <div className="paper-grid absolute inset-0 opacity-[0.08]" />
+        <div className="relative">
+          <span className="font-display text-2xl">Meridian</span>
+          <p className="eyebrow mt-1 !text-primary-foreground/60">Market Research Agent</p>
+        </div>
+        <div className="relative">
           <p className="font-display text-4xl leading-tight">"Every claim, traced back to its source."</p>
-          <p className="mt-4 text-sm opacity-70">Smarter Research. Better Insights. Faster Decisions.</p>
+          <p className="mt-3 text-sm opacity-70">Smarter Research. Better Insights. Faster Decisions.</p>
+          <ul className="mt-10 space-y-5">
+            {highlights.map((h) => (
+              <li key={h.t} className="flex gap-3">
+                <h.icon className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <div>
+                  <p className="text-sm font-semibold">{h.t}</p>
+                  <p className="text-sm opacity-70">{h.d}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-      <div className="flex items-center justify-center p-6">
+
+      <div className="flex items-center justify-center bg-background p-6 py-12">
         <div className="w-full max-w-sm">
-          <div className="md:hidden mb-8"><Logo /></div>
-          <h1 className="text-3xl font-semibold">
-            {mode === "signup" ? "Create account" : mode === "forgot" ? "Reset password" : "Welcome back"}
-          </h1>
-          <form onSubmit={submit} className="mt-6 space-y-4">
+          <div className="mb-8"><Logo /></div>
+          <p className="eyebrow">{mode === "signup" ? "New here" : mode === "forgot" ? "Password help" : "Sign in"}</p>
+          <h1 className="mt-2 text-3xl font-semibold">{heading}</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{subcopy}</p>
+          <form onSubmit={submit} className="mt-8 space-y-4">
             {mode === "signup" && (
-              <div className="space-y-1.5"><Label>Full name</Label><Input value={f.name} onChange={set("name")} required /></div>
+              <div className="space-y-1.5">
+                <Label htmlFor="name">Full name</Label>
+                <Input id="name" value={f.name} onChange={set("name")} autoComplete="name" placeholder="Shravani Rao" required />
+              </div>
             )}
-            <div className="space-y-1.5"><Label>Email</Label><Input type="email" value={f.email} onChange={set("email")} required /></div>
+            <div className="space-y-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" value={f.email} onChange={set("email")} autoComplete="email" placeholder="you@company.com" required />
+            </div>
             {mode !== "forgot" && (
-              <div className="space-y-1.5"><Label>Password</Label><Input type="password" value={f.password} onChange={set("password")} required /></div>
+              <div className="space-y-1.5">
+                <Label htmlFor="password">Password</Label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPw ? "text" : "password"}
+                    value={f.password}
+                    onChange={set("password")}
+                    autoComplete={mode === "signin" ? "current-password" : "new-password"}
+                    className="pr-10"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label={showPw ? "Hide password" : "Show password"}
+                    onClick={() => setShowPw(!showPw)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  >
+                    {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+                {mode === "signup" && <p className="text-xs text-muted-foreground">At least 8 characters.</p>}
+              </div>
             )}
             {mode === "signup" && (
-              <div className="space-y-1.5"><Label>Confirm password</Label><Input type="password" value={f.confirm} onChange={set("confirm")} required /></div>
+              <div className="space-y-1.5">
+                <Label htmlFor="confirm">Confirm password</Label>
+                <div className="relative">
+                  <Input
+                    id="confirm"
+                    type={showConfirm ? "text" : "password"}
+                    value={f.confirm}
+                    onChange={set("confirm")}
+                    autoComplete="new-password"
+                    className="pr-10"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label={showConfirm ? "Hide password" : "Show password"}
+                    onClick={() => setShowConfirm(!showConfirm)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  >
+                    {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
             )}
             {err && <p className="text-sm text-destructive">{err}</p>}
             <Button type="submit" className="w-full" disabled={busy}>
@@ -141,12 +224,12 @@ function AuthPage() {
               </div>
             </>
           )}
-          <div className="mt-6 flex justify-between text-sm">
+          <div className="mt-6 flex flex-wrap justify-between gap-2 text-sm">
             <button className="text-accent hover:underline" onClick={() => { setErr(null); setMode(mode === "signup" ? "signin" : "signup"); }}>
               {mode === "signup" ? "Have an account? Sign in" : "Create an account"}
             </button>
             {mode === "signin" && <button className="text-muted-foreground hover:underline" onClick={() => setMode("forgot")}>Forgot password?</button>}
-            {mode === "forgot" && <button className="text-muted-foreground hover:underline" onClick={() => setMode("signin")}>Back</button>}
+            {mode === "forgot" && <button className="text-muted-foreground hover:underline" onClick={() => setMode("signin")}>Back to sign in</button>}
           </div>
         </div>
       </div>
