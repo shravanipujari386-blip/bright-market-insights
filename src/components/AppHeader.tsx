@@ -1,9 +1,14 @@
-import { Logo } from "@/components/AppHeader";
+import { Link } from "@tanstack/react-router";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 
 export function Logo() {
-  return null;
+  return (
+    <Link to="/" className="flex items-baseline gap-2">
+      <span className="font-display text-xl font-semibold">Meridian</span>
+      <span className="eyebrow hidden sm:inline">Market Research Agent</span>
+    </Link>
+  );
 }
 
 export function AppHeader() {
