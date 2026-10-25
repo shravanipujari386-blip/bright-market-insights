@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { FileText, Home, LogOut, PenLine } from "lucide-react";
+import { FileText, Home, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Logo } from "@/components/AppHeader";
 import {
@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { title: "Overview", url: "/", icon: Home },
-  { title: "New research", url: "/dashboard", icon: PenLine },
+  { title: "Home", url: "/dashboard", icon: Home },
 ];
 
 export function AppSidebar() {
