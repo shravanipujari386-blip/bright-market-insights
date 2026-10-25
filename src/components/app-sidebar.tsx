@@ -25,7 +25,7 @@ export function AppSidebar() {
   const navigate = useNavigate();
   const currentPath = useRouterState({ select: (router) => router.location.pathname });
 
-  const isActive = (url: string) => (url === "/" ? currentPath === "/" : currentPath.startsWith(url) && url !== "/dashboard" ? true : currentPath === url);
+  const isActive = (url: string) => currentPath === url;
   const reportsActive = currentPath.startsWith("/reports/");
 
   const recent = useQuery({
