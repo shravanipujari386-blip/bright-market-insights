@@ -17,7 +17,7 @@ export function AppHeader() {
       <div className="flex h-14 items-center gap-2 px-4">
         <SidebarTrigger />
         <Separator orientation="vertical" className="h-5" />
-        <Logo />
+        <span className="eyebrow hidden sm:inline">Smarter Research. Better Insights. Faster Decisions.</span>
       </div>
     </header>
   );
