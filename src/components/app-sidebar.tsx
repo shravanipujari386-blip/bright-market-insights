@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { title: "Overview", url: "/", icon: Home },
-  { title: "New research", url: "/dashboard", icon: PenLine },
+  { title: "Home", url: "/dashboard", icon: Home },
 ];
 
 export function AppSidebar() {
