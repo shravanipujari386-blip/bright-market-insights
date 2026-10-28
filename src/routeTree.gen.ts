@@ -19,8 +19,9 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedMarketAnalysisRouteImport } from './routes/_authenticated/market-analysis'
 import { Route as AuthenticatedNewResearchRouteImport } from './routes/_authenticated/new-research'
 import { Route as AuthenticatedProductAnalysisRouteImport } from './routes/_authenticated/product-analysis'
-import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
+import { Route as AuthenticatedReportLibraryRouteImport } from './routes/_authenticated/report-library'
 import { Route as AuthenticatedResearchHistoryRouteImport } from './routes/_authenticated/research-history'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedSourcesRouteImport } from './routes/_authenticated/sources'
 import { Route as AuthenticatedVisualizationsRouteImport } from './routes/_authenticated/visualizations'
 import { Route as AuthenticatedReportsIdRouteImport } from './routes/_authenticated/reports.$id'
@@ -79,17 +80,23 @@ const AuthenticatedProductAnalysisRoute =
     path: '/product-analysis',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
-  id: '/reports',
-  path: '/reports',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
+const AuthenticatedReportLibraryRoute =
+  AuthenticatedReportLibraryRouteImport.update({
+    id: '/report-library',
+    path: '/report-library',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedResearchHistoryRoute =
   AuthenticatedResearchHistoryRouteImport.update({
     id: '/research-history',
     path: '/research-history',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSourcesRoute = AuthenticatedSourcesRouteImport.update({
   id: '/sources',
   path: '/sources',
@@ -102,9 +109,9 @@ const AuthenticatedVisualizationsRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedReportsIdRoute = AuthenticatedReportsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => AuthenticatedReportsRoute,
+  id: '/reports/$id',
+  path: '/reports/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -117,8 +124,9 @@ export interface FileRoutesByFullPath {
   '/market-analysis': typeof AuthenticatedMarketAnalysisRoute
   '/new-research': typeof AuthenticatedNewResearchRoute
   '/product-analysis': typeof AuthenticatedProductAnalysisRoute
-  '/reports': typeof AuthenticatedReportsRouteWithChildren
+  '/report-library': typeof AuthenticatedReportLibraryRoute
   '/research-history': typeof AuthenticatedResearchHistoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/sources': typeof AuthenticatedSourcesRoute
   '/visualizations': typeof AuthenticatedVisualizationsRoute
   '/reports/$id': typeof AuthenticatedReportsIdRoute
@@ -133,8 +141,9 @@ export interface FileRoutesByTo {
   '/market-analysis': typeof AuthenticatedMarketAnalysisRoute
   '/new-research': typeof AuthenticatedNewResearchRoute
   '/product-analysis': typeof AuthenticatedProductAnalysisRoute
-  '/reports': typeof AuthenticatedReportsRouteWithChildren
+  '/report-library': typeof AuthenticatedReportLibraryRoute
   '/research-history': typeof AuthenticatedResearchHistoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/sources': typeof AuthenticatedSourcesRoute
   '/visualizations': typeof AuthenticatedVisualizationsRoute
   '/reports/$id': typeof AuthenticatedReportsIdRoute
@@ -151,8 +160,9 @@ export interface FileRoutesById {
   '/_authenticated/market-analysis': typeof AuthenticatedMarketAnalysisRoute
   '/_authenticated/new-research': typeof AuthenticatedNewResearchRoute
   '/_authenticated/product-analysis': typeof AuthenticatedProductAnalysisRoute
-  '/_authenticated/reports': typeof AuthenticatedReportsRouteWithChildren
+  '/_authenticated/report-library': typeof AuthenticatedReportLibraryRoute
   '/_authenticated/research-history': typeof AuthenticatedResearchHistoryRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/sources': typeof AuthenticatedSourcesRoute
   '/_authenticated/visualizations': typeof AuthenticatedVisualizationsRoute
   '/_authenticated/reports/$id': typeof AuthenticatedReportsIdRoute
@@ -169,8 +179,9 @@ export interface FileRouteTypes {
     | '/market-analysis'
     | '/new-research'
     | '/product-analysis'
-    | '/reports'
+    | '/report-library'
     | '/research-history'
+    | '/settings'
     | '/sources'
     | '/visualizations'
     | '/reports/$id'
@@ -185,8 +196,9 @@ export interface FileRouteTypes {
     | '/market-analysis'
     | '/new-research'
     | '/product-analysis'
-    | '/reports'
+    | '/report-library'
     | '/research-history'
+    | '/settings'
     | '/sources'
     | '/visualizations'
     | '/reports/$id'
@@ -202,8 +214,9 @@ export interface FileRouteTypes {
     | '/_authenticated/market-analysis'
     | '/_authenticated/new-research'
     | '/_authenticated/product-analysis'
-    | '/_authenticated/reports'
+    | '/_authenticated/report-library'
     | '/_authenticated/research-history'
+    | '/_authenticated/settings'
     | '/_authenticated/sources'
     | '/_authenticated/visualizations'
     | '/_authenticated/reports/$id'
@@ -288,11 +301,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProductAnalysisRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/reports': {
-      id: '/_authenticated/reports'
-      path: '/reports'
-      fullPath: '/reports'
-      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+    '/_authenticated/report-library': {
+      id: '/_authenticated/report-library'
+      path: '/report-library'
+      fullPath: '/report-library'
+      preLoaderRoute: typeof AuthenticatedReportLibraryRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/research-history': {
@@ -300,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/research-history'
       fullPath: '/research-history'
       preLoaderRoute: typeof AuthenticatedResearchHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/sources': {
@@ -318,24 +338,13 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/reports/$id': {
       id: '/_authenticated/reports/$id'
-      path: '/$id'
+      path: '/reports/$id'
       fullPath: '/reports/$id'
       preLoaderRoute: typeof AuthenticatedReportsIdRouteImport
-      parentRoute: typeof AuthenticatedReportsRoute
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
-
-interface AuthenticatedReportsRouteChildren {
-  AuthenticatedReportsIdRoute: typeof AuthenticatedReportsIdRoute
-}
-
-const AuthenticatedReportsRouteChildren: AuthenticatedReportsRouteChildren = {
-  AuthenticatedReportsIdRoute: AuthenticatedReportsIdRoute,
-}
-
-const AuthenticatedReportsRouteWithChildren =
-  AuthenticatedReportsRoute._addFileChildren(AuthenticatedReportsRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCompetitorAnalysisRoute: typeof AuthenticatedCompetitorAnalysisRoute
@@ -344,10 +353,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMarketAnalysisRoute: typeof AuthenticatedMarketAnalysisRoute
   AuthenticatedNewResearchRoute: typeof AuthenticatedNewResearchRoute
   AuthenticatedProductAnalysisRoute: typeof AuthenticatedProductAnalysisRoute
-  AuthenticatedReportsRoute: typeof AuthenticatedReportsRouteWithChildren
+  AuthenticatedReportLibraryRoute: typeof AuthenticatedReportLibraryRoute
   AuthenticatedResearchHistoryRoute: typeof AuthenticatedResearchHistoryRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedSourcesRoute: typeof AuthenticatedSourcesRoute
   AuthenticatedVisualizationsRoute: typeof AuthenticatedVisualizationsRoute
+  AuthenticatedReportsIdRoute: typeof AuthenticatedReportsIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -357,10 +368,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMarketAnalysisRoute: AuthenticatedMarketAnalysisRoute,
   AuthenticatedNewResearchRoute: AuthenticatedNewResearchRoute,
   AuthenticatedProductAnalysisRoute: AuthenticatedProductAnalysisRoute,
-  AuthenticatedReportsRoute: AuthenticatedReportsRouteWithChildren,
+  AuthenticatedReportLibraryRoute: AuthenticatedReportLibraryRoute,
   AuthenticatedResearchHistoryRoute: AuthenticatedResearchHistoryRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedSourcesRoute: AuthenticatedSourcesRoute,
   AuthenticatedVisualizationsRoute: AuthenticatedVisualizationsRoute,
+  AuthenticatedReportsIdRoute: AuthenticatedReportsIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

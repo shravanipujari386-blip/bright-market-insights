@@ -19,6 +19,8 @@ export const Route = createFileRoute("/_authenticated/reports/$id")({
       { name: "description", content: "AI market research report with verified, cited findings." },
       { property: "og:title", content: "Research report — Meridian" },
       { property: "og:description", content: "AI market research report with verified, cited findings." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ReportPage,
