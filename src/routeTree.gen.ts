@@ -13,7 +13,17 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedCompetitorAnalysisRouteImport } from './routes/_authenticated/competitor-analysis'
+import { Route as AuthenticatedCustomerInsightsRouteImport } from './routes/_authenticated/customer-insights'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedMarketAnalysisRouteImport } from './routes/_authenticated/market-analysis'
+import { Route as AuthenticatedNewResearchRouteImport } from './routes/_authenticated/new-research'
+import { Route as AuthenticatedProductAnalysisRouteImport } from './routes/_authenticated/product-analysis'
+import { Route as AuthenticatedReportLibraryRouteImport } from './routes/_authenticated/report-library'
+import { Route as AuthenticatedResearchHistoryRouteImport } from './routes/_authenticated/research-history'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedSourcesRouteImport } from './routes/_authenticated/sources'
+import { Route as AuthenticatedVisualizationsRouteImport } from './routes/_authenticated/visualizations'
 import { Route as AuthenticatedReportsIdRouteImport } from './routes/_authenticated/reports.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,11 +45,69 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCompetitorAnalysisRoute =
+  AuthenticatedCompetitorAnalysisRouteImport.update({
+    id: '/competitor-analysis',
+    path: '/competitor-analysis',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCustomerInsightsRoute =
+  AuthenticatedCustomerInsightsRouteImport.update({
+    id: '/customer-insights',
+    path: '/customer-insights',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedMarketAnalysisRoute =
+  AuthenticatedMarketAnalysisRouteImport.update({
+    id: '/market-analysis',
+    path: '/market-analysis',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedNewResearchRoute =
+  AuthenticatedNewResearchRouteImport.update({
+    id: '/new-research',
+    path: '/new-research',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedProductAnalysisRoute =
+  AuthenticatedProductAnalysisRouteImport.update({
+    id: '/product-analysis',
+    path: '/product-analysis',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedReportLibraryRoute =
+  AuthenticatedReportLibraryRouteImport.update({
+    id: '/report-library',
+    path: '/report-library',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedResearchHistoryRoute =
+  AuthenticatedResearchHistoryRouteImport.update({
+    id: '/research-history',
+    path: '/research-history',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSourcesRoute = AuthenticatedSourcesRouteImport.update({
+  id: '/sources',
+  path: '/sources',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedVisualizationsRoute =
+  AuthenticatedVisualizationsRouteImport.update({
+    id: '/visualizations',
+    path: '/visualizations',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedReportsIdRoute = AuthenticatedReportsIdRouteImport.update({
   id: '/reports/$id',
   path: '/reports/$id',
@@ -50,14 +118,34 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/competitor-analysis': typeof AuthenticatedCompetitorAnalysisRoute
+  '/customer-insights': typeof AuthenticatedCustomerInsightsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/market-analysis': typeof AuthenticatedMarketAnalysisRoute
+  '/new-research': typeof AuthenticatedNewResearchRoute
+  '/product-analysis': typeof AuthenticatedProductAnalysisRoute
+  '/report-library': typeof AuthenticatedReportLibraryRoute
+  '/research-history': typeof AuthenticatedResearchHistoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/sources': typeof AuthenticatedSourcesRoute
+  '/visualizations': typeof AuthenticatedVisualizationsRoute
   '/reports/$id': typeof AuthenticatedReportsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/competitor-analysis': typeof AuthenticatedCompetitorAnalysisRoute
+  '/customer-insights': typeof AuthenticatedCustomerInsightsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/market-analysis': typeof AuthenticatedMarketAnalysisRoute
+  '/new-research': typeof AuthenticatedNewResearchRoute
+  '/product-analysis': typeof AuthenticatedProductAnalysisRoute
+  '/report-library': typeof AuthenticatedReportLibraryRoute
+  '/research-history': typeof AuthenticatedResearchHistoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/sources': typeof AuthenticatedSourcesRoute
+  '/visualizations': typeof AuthenticatedVisualizationsRoute
   '/reports/$id': typeof AuthenticatedReportsIdRoute
 }
 export interface FileRoutesById {
@@ -66,21 +154,71 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/competitor-analysis': typeof AuthenticatedCompetitorAnalysisRoute
+  '/_authenticated/customer-insights': typeof AuthenticatedCustomerInsightsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/market-analysis': typeof AuthenticatedMarketAnalysisRoute
+  '/_authenticated/new-research': typeof AuthenticatedNewResearchRoute
+  '/_authenticated/product-analysis': typeof AuthenticatedProductAnalysisRoute
+  '/_authenticated/report-library': typeof AuthenticatedReportLibraryRoute
+  '/_authenticated/research-history': typeof AuthenticatedResearchHistoryRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/sources': typeof AuthenticatedSourcesRoute
+  '/_authenticated/visualizations': typeof AuthenticatedVisualizationsRoute
   '/_authenticated/reports/$id': typeof AuthenticatedReportsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/reset-password' | '/dashboard' | '/reports/$id'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/competitor-analysis'
+    | '/customer-insights'
+    | '/dashboard'
+    | '/market-analysis'
+    | '/new-research'
+    | '/product-analysis'
+    | '/report-library'
+    | '/research-history'
+    | '/settings'
+    | '/sources'
+    | '/visualizations'
+    | '/reports/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/reset-password' | '/dashboard' | '/reports/$id'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/competitor-analysis'
+    | '/customer-insights'
+    | '/dashboard'
+    | '/market-analysis'
+    | '/new-research'
+    | '/product-analysis'
+    | '/report-library'
+    | '/research-history'
+    | '/settings'
+    | '/sources'
+    | '/visualizations'
+    | '/reports/$id'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/competitor-analysis'
+    | '/_authenticated/customer-insights'
     | '/_authenticated/dashboard'
+    | '/_authenticated/market-analysis'
+    | '/_authenticated/new-research'
+    | '/_authenticated/product-analysis'
+    | '/_authenticated/report-library'
+    | '/_authenticated/research-history'
+    | '/_authenticated/settings'
+    | '/_authenticated/sources'
+    | '/_authenticated/visualizations'
     | '/_authenticated/reports/$id'
   fileRoutesById: FileRoutesById
 }
@@ -121,11 +259,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/competitor-analysis': {
+      id: '/_authenticated/competitor-analysis'
+      path: '/competitor-analysis'
+      fullPath: '/competitor-analysis'
+      preLoaderRoute: typeof AuthenticatedCompetitorAnalysisRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/customer-insights': {
+      id: '/_authenticated/customer-insights'
+      path: '/customer-insights'
+      fullPath: '/customer-insights'
+      preLoaderRoute: typeof AuthenticatedCustomerInsightsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/market-analysis': {
+      id: '/_authenticated/market-analysis'
+      path: '/market-analysis'
+      fullPath: '/market-analysis'
+      preLoaderRoute: typeof AuthenticatedMarketAnalysisRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/new-research': {
+      id: '/_authenticated/new-research'
+      path: '/new-research'
+      fullPath: '/new-research'
+      preLoaderRoute: typeof AuthenticatedNewResearchRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/product-analysis': {
+      id: '/_authenticated/product-analysis'
+      path: '/product-analysis'
+      fullPath: '/product-analysis'
+      preLoaderRoute: typeof AuthenticatedProductAnalysisRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/report-library': {
+      id: '/_authenticated/report-library'
+      path: '/report-library'
+      fullPath: '/report-library'
+      preLoaderRoute: typeof AuthenticatedReportLibraryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/research-history': {
+      id: '/_authenticated/research-history'
+      path: '/research-history'
+      fullPath: '/research-history'
+      preLoaderRoute: typeof AuthenticatedResearchHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sources': {
+      id: '/_authenticated/sources'
+      path: '/sources'
+      fullPath: '/sources'
+      preLoaderRoute: typeof AuthenticatedSourcesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/visualizations': {
+      id: '/_authenticated/visualizations'
+      path: '/visualizations'
+      fullPath: '/visualizations'
+      preLoaderRoute: typeof AuthenticatedVisualizationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/reports/$id': {
@@ -139,12 +347,32 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCompetitorAnalysisRoute: typeof AuthenticatedCompetitorAnalysisRoute
+  AuthenticatedCustomerInsightsRoute: typeof AuthenticatedCustomerInsightsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedMarketAnalysisRoute: typeof AuthenticatedMarketAnalysisRoute
+  AuthenticatedNewResearchRoute: typeof AuthenticatedNewResearchRoute
+  AuthenticatedProductAnalysisRoute: typeof AuthenticatedProductAnalysisRoute
+  AuthenticatedReportLibraryRoute: typeof AuthenticatedReportLibraryRoute
+  AuthenticatedResearchHistoryRoute: typeof AuthenticatedResearchHistoryRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedSourcesRoute: typeof AuthenticatedSourcesRoute
+  AuthenticatedVisualizationsRoute: typeof AuthenticatedVisualizationsRoute
   AuthenticatedReportsIdRoute: typeof AuthenticatedReportsIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCompetitorAnalysisRoute: AuthenticatedCompetitorAnalysisRoute,
+  AuthenticatedCustomerInsightsRoute: AuthenticatedCustomerInsightsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedMarketAnalysisRoute: AuthenticatedMarketAnalysisRoute,
+  AuthenticatedNewResearchRoute: AuthenticatedNewResearchRoute,
+  AuthenticatedProductAnalysisRoute: AuthenticatedProductAnalysisRoute,
+  AuthenticatedReportLibraryRoute: AuthenticatedReportLibraryRoute,
+  AuthenticatedResearchHistoryRoute: AuthenticatedResearchHistoryRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedSourcesRoute: AuthenticatedSourcesRoute,
+  AuthenticatedVisualizationsRoute: AuthenticatedVisualizationsRoute,
   AuthenticatedReportsIdRoute: AuthenticatedReportsIdRoute,
 }
 

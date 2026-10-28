@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { FileText, Home, LogOut } from "lucide-react";
+import { FileText, Home, LogOut, Search, History, TrendingUp, Building2, Package, Users, ChartColumn, Link2, Settings } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Logo } from "@/components/AppHeader";
 import {
@@ -17,8 +17,18 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { title: "Home", url: "/dashboard", icon: Home },
-];
+  { title: "Overview", url: "/dashboard", icon: Home },
+  { title: "New Research", url: "/new-research", icon: Search },
+  { title: "Research History", url: "/research-history", icon: History },
+  { title: "Market Analysis", url: "/market-analysis", icon: TrendingUp },
+  { title: "Competitor Analysis", url: "/competitor-analysis", icon: Building2 },
+  { title: "Product Analysis", url: "/product-analysis", icon: Package },
+  { title: "Customer Insights", url: "/customer-insights", icon: Users },
+  { title: "Visualizations", url: "/visualizations", icon: ChartColumn },
+  { title: "Sources & References", url: "/sources", icon: Link2 },
+  { title: "Reports", url: "/report-library", icon: FileText },
+  { title: "Settings", url: "/settings", icon: Settings },
+] as const;
 
 export function AppSidebar() {
   const navigate = useNavigate();
@@ -44,7 +54,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <div className="flex h-12 items-center px-2 group-data-[collapsible=icon]:justify-center">
-          <span className="group-data-[collapsible=icon]:hidden">
+          <span className="group-data-[collapsible=icon]:hidden [&_.eyebrow]:hidden">
             <Logo />
           </span>
           <span className="hidden font-display text-lg font-semibold group-data-[collapsible=icon]:inline">M</span>

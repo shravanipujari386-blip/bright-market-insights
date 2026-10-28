@@ -10,6 +10,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Smarter Research. Better Insights. Faster Decisions. AI agents research live web sources and deliver cited market reports." },
       { property: "og:title", content: "Meridian — Intelligent Market Research Agent" },
       { property: "og:description", content: "AI agents research live web sources and deliver cited market reports." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
